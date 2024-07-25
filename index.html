@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Frontend Mentor | Article preview component</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+
+    <style>
+      /* 
+    ## Colors
+
+      - Very Dark Grayish Blue: hsl(217, 19%, 35%)
+      - Desaturated Dark Blue: hsl(214, 17%, 51%)
+      - Grayish Blue: hsl(212, 23%, 69%)
+      - Light Grayish Blue: hsl(210, 46%, 95%)
+
+      ## Typography
+
+      ### Body Copy
+
+      - Font size: 13px
+
+      ### Headings
+
+      - Family: [Manrope](https://fonts.google.com/specimen/Manrope)
+      - Weights: 500, 700 */
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+      }
+      body {
+        font-family: Manrope, sans-serif;
+        font-size: 1.3rem;
+        display: flex;
+        /* align-items: center;
+        justify-content: center; */
+        background-color: hsl(210, 46%, 95%);
+        font-weight: 500;
+      }
+      main {
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 8rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        border-radius: 1.2rem;
+        background-color: #fff;
+        position: relative;
+      }
+      .drawers {
+        width: 100%;
+        /* height: 100%; */
+      }
+      .left-side {
+        background-image: url(images/drawers.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-top-left-radius: 1.2rem;
+        border-bottom-left-radius: 1.2rem;
+      }
+      .right-side {
+        padding: 3.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.8rem;
+      }
+      h2,
+      p {
+        margin: 0;
+      }
+      h2 {
+        color: hsl(217, 19%, 35%);
+        font-weight: 700;
+      }
+      p {
+        color: hsl(214, 17%, 51%);
+        line-height: 1.5;
+      }
+      .avatar {
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 50%;
+      }
+      .michelle-box {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+      }
+      .name {
+        margin: 0;
+        color: hsl(217, 19%, 35%);
+        font-weight: 700;
+      }
+      .date {
+        color: hsl(212, 23%, 69%);
+      }
+      .michelle-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .name-date {
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+      }
+      .share-btn {
+        border: none;
+        background-color: hsl(210, 46%, 95%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        border-radius: 50%;
+        color: hsl(217, 19%, 35%);
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .share-btn:active {
+        color: hsl(210, 46%, 95%);
+
+        background-color: hsl(214, 17%, 51%);
+      }
+      .share-icon {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+      .share-box {
+        position: absolute;
+        background-color: hsl(217, 19%, 35%);
+        padding: 1.5rem 3.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.2rem;
+        border-radius: 0.4rem;
+        right: -4.8rem;
+        bottom: 9.3rem;
+      }
+      .share-box P {
+        letter-spacing: 2.4px;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .icons {
+        width: 1.6rem;
+      }
+      .share-box-mobile {
+        display: flex;
+        background-color: hsl(217, 19%, 35%);
+        /* width: auto; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4.8rem;
+        padding: 1.2rem 3.2rem;
+        border-bottom-left-radius: 1.2rem;
+        border-bottom-right-radius: 1.2rem;
+      }
+      .share-box-mobile button {
+        color: hsl(210, 46%, 95%);
+
+        background-color: hsl(214, 17%, 51%);
+      }
+      .share-hide {
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        gap: 3.2rem;
+      }
+      .share-box::after {
+        position: absolute;
+        content: "";
+        bottom: -1rem;
+        /* left: 50%; */
+        transform: translateX(-50%, -50%);
+        /* background-color: hsl(217, 19%, 35%); */
+        width: 0;
+        height: 0;
+        border-right: 1.2rem solid transparent;
+        border-left: 1.2rem solid transparent;
+        border-top: 1.2rem solid hsl(217, 19%, 35%);
+      }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+        display: none;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      .hidden,
+      .drawers {
+        display: none;
+      }
+
+      /* MEDIA QUERY */
+      @media (max-width: 80em) {
+        main {
+          width: 60%;
+        }
+      }
+      @media (max-width: 63em) {
+        main {
+          width: 70%;
+        }
+      }
+      @media (max-width: 61em) {
+        main {
+          width: 80%;
+        }
+      }
+      @media (min-width: 601px) {
+        .share-box-mobile {
+          display: none;
+        }
+      }
+      @media (max-width: 51.1em) {
+        main {
+          width: 85%;
+        }
+        .share-box {
+          padding: 1.5rem 1rem;
+          gap: 0.8rem;
+          right: -2.4rem;
+        }
+      }
+      @media (max-width: 44em) {
+        main {
+          width: 90%;
+        }
+      }
+      @media (max-width: 38em) {
+        main {
+          /* width: %; */
+          /* grid-template-columns: 1fr;
+           */
+          display: flex;
+          flex-direction: column;
+        }
+        .share-box {
+          display: none;
+        }
+
+        .left-side {
+          background-image: none;
+        }
+        .drawers {
+          display: block;
+          width: 100%;
+          height: 100%;
+          border-top-left-radius: 1.2rem;
+          border-top-right-radius: 1.2rem;
+        }
+
+        .icons {
+          width: 2rem;
+        }
+      }
+      @media (max-width: 25em) {
+        html {
+          font-size: 55%;
+        }
+        .share-box-mobile {
+          justify-content: center;
+        }
+        @media (max-width: 20em) {
+          html {
+            font-size: 48%;
+          }
+          .share-box-mobile {
+            /* justify-content: center; */
+          }
+        }
+      }
+      @media (max-width: 17em) {
+        html {
+          font-size: 38%;
+        }
+      }
+      @media (max-width: 13em) {
+        html {
+          font-size: 34%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="left-side">
+        <img class="drawers" src="images/drawers.jpg" alt="" />
+      </div>
+      <div class="right-side">
+        <h2>
+          Shift the overall look and feel by adding these wonderful touches to
+          furniture in your home
+        </h2>
+        <p>
+          Ever been in a room and felt like something was missing? Perhaps it
+          felt slightly bare and uninviting. I’ve got some simple tips to help
+          you make any room feel complete.
+        </p>
+        <div class="michelle-info">
+          <div class="michelle-box">
+            <img class="avatar" src="images/avatar-michelle.jpg" alt="" />
+            <div class="name-date">
+              <p class="name">Michelle Appleton</p>
+              <p class="date">28 Jun 2020</p>
+            </div>
+          </div>
+          <button class="share-btn">
+            <ion-icon class="share-icon" name="arrow-redo"></ion-icon>
+          </button>
+          <div class="share-box hidden">
+            <p>SHARE</p>
+            <a href="">
+              <img class="icons" src="images/icon-facebook.svg" alt=""
+            /></a>
+            <a href="">
+              <img class="icons" src="images/icon-twitter.svg" alt=""
+            /></a>
+            <a href="">
+              <img class="icons" src="images/icon-pinterest.svg" alt=""
+            /></a>
+          </div>
+        </div>
+      </div>
+      <div class="share-box-mobile hidden">
+        <div class="share-hide">
+          <p>SHARE</p>
+          <a href="">
+            <img class="icons" src="images/icon-facebook.svg" alt=""
+          /></a>
+          <a href="">
+            <img class="icons" src="images/icon-twitter.svg" alt=""
+          /></a>
+          <a href="">
+            <img class="icons" src="images/icon-pinterest.svg" alt=""
+          /></a>
+        </div>
+        <button class="share-btn">
+          <ion-icon class="share-icon" name="arrow-redo"></ion-icon>
+        </button>
+      </div>
+    </main>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Kolade</a>.
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      const shareBtn = document.querySelectorAll(".share-btn");
+      const shareBox = document.querySelector(".share-box");
+      const shareBoxMobile = document.querySelector(".share-box-mobile");
+
+      for (let i = 0; i < shareBtn.length; i++) {
+        shareBtn[i].addEventListener("click", () => {
+          if (window.innerWidth <= 600) {
+            shareBoxMobile.classList.toggle("hidden");
+            document.querySelector(".michelle-info").classList.toggle("hidden");
+          } else {
+            shareBox.classList.toggle("hidden");
+            // document.querySelector(".michelle-info").classList.toggle("hidden");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
